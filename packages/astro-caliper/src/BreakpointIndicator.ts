@@ -17,8 +17,6 @@ export default class BreakpointIndicator {
     const indicator = createContainer<BreakpointIndicatorInt>({
       id: IDS.indicator,
       styles: INDICATOR_STYLES + this.POSITION_STYLES,
-      className:
-        'before:content-["XS"] sm:before:content-["SM"] md:before:content-["MD"] lg:before:content-["LG"] xl:before:content-["XL"]',
     });
 
     if (!indicator) return;

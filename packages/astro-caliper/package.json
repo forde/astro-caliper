@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "dev": "tsc --watch",
+    "dev": "nodemon --watch src --ext ts --exec \"npm run build\"",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
@@ -24,6 +24,7 @@
   "devDependencies": {
     "@types/node": "^25.3.3",
     "astro": "^5.15.9",
+    "nodemon": "^3.1.14",
     "typescript": "^5.0.0"
   },
   "keywords": [
