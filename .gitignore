@@ -1,9 +1,19 @@
-pnpm-debug.log*
+# Dependencies
 node_modules/
+
+# Build outputs
 dist/
 
-.env
-.env.production
-.DS_Store
-.vscode/
+# Astro
 .astro/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store

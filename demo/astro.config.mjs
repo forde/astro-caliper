@@ -6,7 +6,6 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   integrations: [caliper()],
-
   vite: {
     plugins: [tailwindcss()],
   },
