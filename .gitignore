@@ -1,0 +1,9 @@
+pnpm-debug.log*
+node_modules/
+dist/
+
+.env
+.env.production
+.DS_Store
+.vscode/
+.astro/
