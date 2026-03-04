@@ -9,6 +9,9 @@ export const IDS = {
   rulerDynamicEnd: "astro-caliper-ruler-dynamic-end",
   rulerLine: "astro-caliper-ruler-line",
   astroToolbar: "dev-toolbar-root",
+  tagName: "astro-caliper-tag-name",
+  dimensions: "astro-caliper-dimensions",
+  font: "astro-caliper-font-info",
 } as const;
 
 export const CLASS_NAMES = {

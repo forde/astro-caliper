@@ -5,7 +5,7 @@ import BreakpointManager from "./BreakpointManager";
 import TooltipManager from "./TooltipManager";
 import StyleManager from "./StyleManager";
 import RulerManager from "./RulerManager";
-import ElementInspectorManager from "./ElementInspectorManager";
+import InspectorManager from "./InspectorManager";
 
 export default defineToolbarApp({
   init(canvas, app) {
@@ -14,14 +14,14 @@ export default defineToolbarApp({
     const appState = new AppState();
     const ruller = new RulerManager();
     const tooltip = new TooltipManager();
-    const elementInspector = new ElementInspectorManager();
+    const inspector = new InspectorManager();
 
     const enableFeatures = (): void => {
       styleManager.inject();
       breakpointManager.create();
       tooltip.create();
       ruller.create();
-      elementInspector.create();
+      inspector.create();
       appState.enable();
     };
 
@@ -30,7 +30,7 @@ export default defineToolbarApp({
       breakpointManager.remove();
       tooltip.remove();
       ruller.remove();
-      elementInspector.remove();
+      inspector.remove();
       appState.disable();
     };
 

@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const toolbarIcon = readFileSync(
-  join(__dirname, "assets/toolbar-icon.svg"),
+  join(__dirname, "assets/toolbar-icon-caliper.svg"),
   "utf-8",
 );
 

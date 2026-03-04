@@ -2,7 +2,7 @@ import { IDS, CLASS_NAMES } from "./constants";
 import { RulerState } from "./state/RulerState";
 import { TooltipState } from "./state/TooltopState";
 
-export default class ElementInspectorManager {
+export default class InspectorManager {
   // Element references
   private inspectedElement: HTMLElement | null = null;
   private rulerActive: boolean = false;
@@ -28,9 +28,7 @@ export default class ElementInspectorManager {
 
         if (!target) return;
 
-        const dimensionInfo = this.getDimensionInfo(target);
-        const fontInfo = this.getFontInfo(target);
-        TooltipState.update(`${dimensionInfo} ${fontInfo}`);
+        TooltipState.update(this.formatTooltipContent(target));
       }
     });
 
@@ -81,6 +79,13 @@ export default class ElementInspectorManager {
     return `${width} × ${height}px`;
   };
 
+  private formatTooltipContent = (element: Element): string => {
+    const dimensionInfo = `<span id="${IDS.dimensions}">${this.getDimensionInfo(element)}</span>`;
+    const fontInfo = `<span id="${IDS.font}">${this.getFontInfo(element)}</span>`;
+    const tag = `<span id="${IDS.tagName}">&lt;<span>${element.tagName.toLowerCase()}</span>/&gt;</span>`;
+    return `${tag} ${dimensionInfo} ${fontInfo}`;
+  };
+
   private hasTextContent = (element: Element): boolean => {
     // Only show font info if element has direct text nodes
     for (const node of element.childNodes) {
@@ -119,10 +124,7 @@ export default class ElementInspectorManager {
       // Add highlight to current element
       target.classList.add(CLASS_NAMES.highlight);
 
-      const dimensionInfo = this.getDimensionInfo(target);
-      const fontInfo = this.getFontInfo(target);
-
-      TooltipState.update(`${dimensionInfo} ${fontInfo}`);
+      TooltipState.update(this.formatTooltipContent(target));
     }
   };
 
@@ -144,8 +146,8 @@ export default class ElementInspectorManager {
   }
 
   // Static factory method if needed
-  static init(): ElementInspectorManager {
-    const manager = new ElementInspectorManager();
+  static init(): InspectorManager {
+    const manager = new InspectorManager();
     manager.create();
     return manager;
   }
