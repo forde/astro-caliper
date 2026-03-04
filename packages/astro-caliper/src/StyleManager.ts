@@ -1,5 +1,10 @@
 import { IDS, CLASS_NAMES } from "./constants";
 
+const background =
+  "linear-gradient(180deg, #13151A 0%, rgba(19, 21, 26, 0.88) 100%)";
+const shadow =
+  "0px 0px 0px 0px rgba(19, 21, 26, 0.30), 0px 1px 2px 0px rgba(19, 21, 26, 0.29), 0px 4px 4px 0px rgba(19, 21, 26, 0.26), 0px 10px 6px 0px rgba(19, 21, 26, 0.15), 0px 17px 7px 0px rgba(19, 21, 26, 0.04), 0px 26px 7px 0px rgba(19, 21, 26, 0.01)";
+
 export default class StyleManager {
   // breakpoints must be listed from smallest to largest
   private readonly BREAKPOINTS = [
@@ -30,9 +35,9 @@ export default class StyleManager {
       font-size: 14px;
       font-weight: medium;
       outline: none !important;
-      background: linear-gradient(180deg, #13151A 0%, rgba(19, 21, 26, 0.88) 100%);
+      background: ${background};
       border-radius: 20px;
-      box-shadow: 0px 0px 0px 0px rgba(19, 21, 26, 0.30), 0px 1px 2px 0px rgba(19, 21, 26, 0.29), 0px 4px 4px 0px rgba(19, 21, 26, 0.26), 0px 10px 6px 0px rgba(19, 21, 26, 0.15), 0px 17px 7px 0px rgba(19, 21, 26, 0.04), 0px 26px 7px 0px rgba(19, 21, 26, 0.01);
+      box-shadow: ${shadow};
       white-space: nowrap;
     }
     #${IDS.tagName} {
@@ -75,37 +80,25 @@ export default class StyleManager {
     }
     #${IDS.rulerStaticEnd}, #${IDS.rulerDynamicEnd} {
       position: fixed;
-      width: 24px;
-      height: 24px;
+      width: 12px;
+      height: 12px;
       transform: translate(-50%, -50%);
       outline: none !important;
-      background: linear-gradient(180deg, rgba(19,21,26, 1) 0%, rgba(19, 21, 26, 0.88) 100%);
-      box-shadow: 0px 0px 0px 0px rgba(19, 21, 26, 0.30), 0px 1px 2px 0px rgba(19, 21, 26, 0.29), 0px 4px 4px 0px rgba(19, 21, 26, 0.26), 0px 10px 6px 0px rgba(19, 21, 26, 0.15), 0px 17px 7px 0px rgba(19, 21, 26, 0.04), 0px 26px 7px 0px rgba(19, 21, 26, 0.01);
+      background: ${background};
+      box-shadow: ${shadow};
       border-radius: 50%;
+      padding:4px;
+      box-sizing: border-box;
     }
-    #${IDS.rulerStaticEnd}::before, #${IDS.rulerDynamicEnd}::before,
     #${IDS.rulerStaticEnd}::after, #${IDS.rulerDynamicEnd}::after {
       content: '';
-      position: absolute;
       background: #fff;
       z-index: 99999;
-      shape-rendering: crispEdges;
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
-    }
-    #${IDS.rulerStaticEnd}::before, #${IDS.rulerDynamicEnd}::before {
-      width: 1.5px;
-      height: 80%;
-      top: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    #${IDS.rulerStaticEnd}::after, #${IDS.rulerDynamicEnd}::after {
-      height: 1.5px;
-      width: 80%;
-      left: 10%;
-      top: 50%;
-      transform: translateY(-50%);
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 50%;
     }
     #${IDS.rulerLine} {
       position: fixed;
