@@ -3,14 +3,6 @@ import { createContainer } from "./utils/dom";
 import { RulerState } from "./state/RulerState";
 import { TooltipState } from "./state/TooltopState";
 
-export interface RullerElement extends HTMLElement {
-  eventHandlers?: {
-    mouseMove: (e: MouseEvent) => void;
-    keyUp: (e: KeyboardEvent) => void;
-    keyDown: (e: KeyboardEvent) => void;
-  };
-}
-
 export interface RulerElement extends HTMLElement {
   rulerManager?: RulerManager;
 }
@@ -136,19 +128,20 @@ export default class RulerManager {
       this.container?.style.setProperty("display", "block");
 
       RulerState.update(0, 0, true);
-      TooltipState.update(`X 0 Y 0`);
+      TooltipState.update("X 0 Y 0");
     }
   }
 
   private handleKeyUp(e: KeyboardEvent): void {
     if (e.key === "Alt" && this.isActive) {
       this.isActive = false;
+      TooltipState.update("");
       RulerState.reset();
       this.container?.style.setProperty("display", "none");
     }
   }
 
-  // Static factory method if you need it
+  // Static factory method if needed
   static init(): RulerManager {
     const manager = new RulerManager();
     manager.create();

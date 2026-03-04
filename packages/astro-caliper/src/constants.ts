@@ -8,6 +8,7 @@ export const IDS = {
   rulerStaticEnd: "astro-caliper-ruler-static-end",
   rulerDynamicEnd: "astro-caliper-ruler-dynamic-end",
   rulerLine: "astro-caliper-ruler-line",
+  astroToolbar: "dev-toolbar-root",
 } as const;
 
 export const CLASS_NAMES = {

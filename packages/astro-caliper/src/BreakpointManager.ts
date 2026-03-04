@@ -6,13 +6,13 @@ interface BreakpointIndicatorInt extends HTMLElement {
 }
 
 export default class BreakpointIndicator {
-  private static readonly POSITION_STYLES = `
+  private readonly POSITION_STYLES = `
     top: 12px;
     left: 50%;
     transform: translateX(-50%);
   `;
 
-  static create(): void {
+  create(): void {
     const indicator = createContainer<BreakpointIndicatorInt>({
       id: IDS.breakpointIndicator,
       styles: this.POSITION_STYLES,
@@ -32,12 +32,12 @@ export default class BreakpointIndicator {
     indicator.resizeObserver = resizeObserver;
   }
 
-  private static updateText(indicator: HTMLElement): void {
+  private updateText(indicator: HTMLElement): void {
     const width = window.innerWidth;
     indicator.textContent = ` (${width}px)`;
   }
 
-  static remove(): void {
+  remove(): void {
     const indicator = document.getElementById(
       IDS.breakpointIndicator,
     ) as BreakpointIndicatorInt | null;

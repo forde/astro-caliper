@@ -2,7 +2,7 @@ import { IDS, CLASS_NAMES } from "./constants";
 
 export default class StyleManager {
   // breakpoints must be listed from smallest to largest
-  private static readonly BREAKPOINTS = [
+  private readonly BREAKPOINTS = [
     { name: "XS", minWidth: 0 },
     { name: "SM", minWidth: 640 },
     { name: "MD", minWidth: 768 },
@@ -11,7 +11,7 @@ export default class StyleManager {
     { name: "2XL", minWidth: 1536 },
   ];
 
-  private static readonly OUTLINE_STYLES = `
+  private readonly OUTLINE_STYLES = `
     * { outline: 1px solid rgba(255, 0, 0, 0.2) !important; }
 
     .${CLASS_NAMES.highlight} {
@@ -20,7 +20,7 @@ export default class StyleManager {
     }
   `;
 
-  private static readonly TOOLTIP_STYLES = `
+  private readonly TOOLTIP_STYLES = `
     #${IDS.tooltip}, #${IDS.breakpointIndicator} {
       position: fixed;
       z-index: 99999;
@@ -29,7 +29,6 @@ export default class StyleManager {
       font-family: monospace;
       font-size: 14px;
       font-weight: medium;
-      pointer-events: none;
       outline: none !important;
       background: linear-gradient(180deg, #13151A 0%, rgba(19, 21, 26, 0.88) 100%);
       border-radius: 20px;
@@ -38,7 +37,7 @@ export default class StyleManager {
     }
   `;
 
-  private static readonly BREAKPOINT_INDICATOR_STYLES = `
+  private readonly BREAKPOINT_INDICATOR_STYLES = `
     ${this.BREAKPOINTS.map(
       (bp) => `
       @media (min-width: ${bp.minWidth}px) {
@@ -50,7 +49,7 @@ export default class StyleManager {
     ).join("\n")}
   `;
 
-  private static readonly RULLER_STYLES = `
+  private readonly RULLER_STYLES = `
     #${IDS.rulerContainer} {
       position: fixed;
       pointer-events: none;
@@ -64,7 +63,7 @@ export default class StyleManager {
       height: 24px;
       transform: translate(-50%, -50%);
       outline: none !important;
-      background: rgba(255,255,255, .6);
+      background: rgba(255,255,255, .5);
       border-radius: 50%;
     }
     #${IDS.rulerStaticEnd}::before, #${IDS.rulerDynamicEnd}::before,
@@ -97,7 +96,7 @@ export default class StyleManager {
     }
   `;
 
-  static inject(): void {
+  inject(): void {
     if (document.getElementById(IDS.styles)) return;
 
     const style = document.createElement("style");
@@ -111,7 +110,7 @@ export default class StyleManager {
     document.head.appendChild(style);
   }
 
-  static remove(): void {
+  remove(): void {
     document.getElementById(IDS.styles)?.remove();
   }
 }

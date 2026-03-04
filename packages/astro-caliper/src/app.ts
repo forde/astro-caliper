@@ -1,29 +1,36 @@
 import { defineToolbarApp } from "astro/toolbar";
 import type { DevToolbarApp } from "astro";
 import AppState from "./state/AppState";
-import BreakpointIndicator from "./BreakpointIndicator";
+import BreakpointManager from "./BreakpointManager";
 import TooltipManager from "./TooltipManager";
 import StyleManager from "./StyleManager";
 import RulerManager from "./RulerManager";
+import ElementInspectorManager from "./ElementInspectorManager";
 
 export default defineToolbarApp({
   init(canvas, app) {
+    const styleManager = new StyleManager();
+    const breakpointManager = new BreakpointManager();
     const appState = new AppState();
     const ruller = new RulerManager();
+    const tooltip = new TooltipManager();
+    const elementInspector = new ElementInspectorManager();
 
     const enableFeatures = (): void => {
-      StyleManager.inject();
-      BreakpointIndicator.create();
-      TooltipManager.create();
+      styleManager.inject();
+      breakpointManager.create();
+      tooltip.create();
       ruller.create();
+      elementInspector.create();
       appState.enable();
     };
 
     const disableFeatures = (): void => {
-      StyleManager.remove();
-      BreakpointIndicator.remove();
-      TooltipManager.remove();
+      styleManager.remove();
+      breakpointManager.remove();
+      tooltip.remove();
       ruller.remove();
+      elementInspector.remove();
       appState.disable();
     };
 
