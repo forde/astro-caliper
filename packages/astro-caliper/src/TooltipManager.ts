@@ -1,6 +1,7 @@
 import { IDS, CLASS_NAMES } from "./constants";
-import { INDICATOR_STYLES } from "./styles";
 import { createContainer } from "./utils/dom";
+import { RulerState } from "./state/RulerState";
+import { TooltipState } from "./state/TooltopState";
 
 export interface TooltipElement extends HTMLElement {
   eventHandlers?: {
@@ -17,7 +18,6 @@ export default class TooltipManager {
   static create(): void {
     const tooltip = createContainer<TooltipElement>({
       id: IDS.tooltip,
-      styles: INDICATOR_STYLES,
     });
 
     if (!tooltip) return;
@@ -116,14 +116,14 @@ export default class TooltipManager {
       const target = e.target as Element;
 
       // Skip if hovering the tooltip itself or indicators
-      if (target.id === IDS.tooltip || target.id === IDS.indicator) {
+      if (target.id === IDS.tooltip || target.id === IDS.breakpointIndicator) {
         tooltip.style.opacity = "0";
         removeHighlight();
         return;
       }
 
       // Only update dimensions if element changed
-      if (currentElement !== target) {
+      if (!RulerState.isActive && currentElement !== target) {
         removeHighlight();
         currentElement = target;
 
@@ -133,12 +133,15 @@ export default class TooltipManager {
         const rect = target.getBoundingClientRect();
         const width = Math.round(rect.width);
         const height = Math.round(rect.height);
-
-        // Build tooltip content
         const dimensionInfo = `${width} × ${height}px`;
         const fontInfo = getFontInfo(target);
 
         tooltip.innerHTML = `${dimensionInfo} ${fontInfo}`;
+        tooltip.style.opacity = "1";
+      }
+
+      if (RulerState.isActive) {
+        tooltip.innerHTML = `X ${RulerState.dx} Y ${RulerState.dy}`;
         tooltip.style.opacity = "1";
       }
 

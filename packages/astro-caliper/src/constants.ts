@@ -2,8 +2,12 @@ export const STORAGE_KEY = "astro-caliper-enabled";
 
 export const IDS = {
   styles: "astro-caliper-styles",
-  indicator: "astro-caliper-breakpoint-indicator",
+  breakpointIndicator: "astro-caliper-breakpoint-indicator",
   tooltip: "astro-caliper-tooltip",
+  rulerContainer: "astro-caliper-ruler-container",
+  rulerStaticEnd: "astro-caliper-ruler-static-end",
+  rulerDynamicEnd: "astro-caliper-ruler-dynamic-end",
+  rulerLine: "astro-caliper-ruler-line",
 } as const;
 
 export const CLASS_NAMES = {

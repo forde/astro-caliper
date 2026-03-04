@@ -1,5 +1,4 @@
 import { IDS } from "./constants";
-import { INDICATOR_STYLES } from "./styles";
 import { createContainer } from "./utils/dom";
 
 interface BreakpointIndicatorInt extends HTMLElement {
@@ -15,8 +14,8 @@ export default class BreakpointIndicator {
 
   static create(): void {
     const indicator = createContainer<BreakpointIndicatorInt>({
-      id: IDS.indicator,
-      styles: INDICATOR_STYLES + this.POSITION_STYLES,
+      id: IDS.breakpointIndicator,
+      styles: this.POSITION_STYLES,
     });
 
     if (!indicator) return;
@@ -40,7 +39,7 @@ export default class BreakpointIndicator {
 
   static remove(): void {
     const indicator = document.getElementById(
-      IDS.indicator,
+      IDS.breakpointIndicator,
     ) as BreakpointIndicatorInt | null;
     if (!indicator) return;
 

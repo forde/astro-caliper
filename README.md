@@ -32,9 +32,14 @@ Injects global debug styles to help visualize element boundaries.
 
 ## Installation & Integration
 
-Install with ...
+Install as a dev dependency
 
-To use it in your Astro config:
+```bash
+pnpm add -D astro-caliper
+npm install --save-dev astro-caliper
+```
+
+Add Astro config integration:
 
 ```typescript
 //astro.config.mjs

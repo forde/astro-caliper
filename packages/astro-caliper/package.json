@@ -1,6 +1,7 @@
 {
   "name": "astro-caliper",
   "version": "0.1.0",
+  "description": "Astro toolbar app designed to assist developers in converting designs to code. It provides visual aids and inspection tools directly within the browser.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -14,9 +15,9 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc",
-    "dev": "nodemon --watch src --ext ts --exec \"npm run build\"",
-    "prepublishOnly": "npm run build"
+    "build": "tsc && cp -r src/assets dist/",
+    "dev": "nodemon --watch src --ext ts,svg --exec \"pnpm build\"",
+    "prepublishOnly": "pnpm build"
   },
   "peerDependencies": {
     "astro": "^5.0.0"
@@ -36,5 +37,10 @@
     "type": "git",
     "url": "https://github.com/forde/astro-caliper"
   },
-  "license": "MIT"
+  "author": "Konrad Węgrzyniak <konrad@forde.pl>",
+  "license": "MIT",
+  "homepage": "https://github.com/yourusername/astro-caliper#readme",
+  "bugs": {
+    "url": "https://github.com/yourusername/astro-caliper/issues"
+  }
 }

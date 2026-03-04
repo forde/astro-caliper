@@ -1,6 +1,6 @@
-import { STORAGE_KEY } from "./constants";
+import { STORAGE_KEY } from "../constants";
 
-export default class StateManager {
+export default class AppState {
   private enabled = false;
 
   constructor() {
