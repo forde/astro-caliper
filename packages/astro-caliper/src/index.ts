@@ -12,7 +12,7 @@ const toolbarIcon = readFileSync(
 );
 
 export default function caliperIntegration(
-  config: AppConfig,
+  config?: AppConfig,
 ): AstroIntegration {
   return {
     name: "caliper-integration",

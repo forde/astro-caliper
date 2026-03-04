@@ -1,6 +1,8 @@
-# Astro Caliper
+![Alt text](./packages/astro-caliper/src/assets/banner.png)
 
-Caliper is a Astro toolbar app designed to assist developers in converting designs to code. It provides visual aids and inspection tools directly within the browser.
+## Astro dev toolber integration
+
+Caliper is an Astro toolbar app designed to assist developers in converting designs to code. It provides visual aids and inspection tools directly within the browser.
 
 ## Features
 
