@@ -1,4 +1,5 @@
 import { TooltipState } from "./state/TooltipState";
+import { isInputFocused } from "./utils/dom";
 
 export default class ClickManager {
   private preventDefault: boolean = false;
@@ -33,7 +34,9 @@ export default class ClickManager {
   }
 
   private handleKeyDown(e: KeyboardEvent): void {
-    if (e.key === "p" && !this.preventDefault) {
+    const inputFocused = isInputFocused();
+
+    if (e.key === "p" && !this.preventDefault && !inputFocused) {
       this.preventDefault = true;
       TooltipState.update({ mode: "click-prevention" });
     }

@@ -63,6 +63,12 @@ export default class StyleManager {
   `;
 
   private readonly BREAKPOINT_INDICATOR_STYLES = `
+    #${IDS.breakpointIndicator} {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
     ${this.BREAKPOINTS.map(
       (bp) => `
       @media (min-width: ${bp.minWidth}px) {
@@ -72,6 +78,18 @@ export default class StyleManager {
       }
     `,
     ).join("\n")}
+
+    #${IDS.settingsToggleButton} {
+      cursor: pointer;
+      svg {
+        width: 15px;
+        height: 15px;
+        transition: transform 0.3s ease-in-out;
+      }
+    }
+    #${IDS.settingsToggleButton}:hover svg {
+      transform: rotate(90deg);
+    }
   `;
 
   private readonly RULLER_STYLES = `

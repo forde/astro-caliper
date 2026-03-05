@@ -1,6 +1,7 @@
 import { IDS, CLASS_NAMES } from "./constants";
 import { RulerState } from "./state/RulerState";
 import { TooltipState } from "./state/TooltipState";
+import { SettingsState } from "./state/SettingsState";
 
 export default class InspectorManager {
   // Element references
@@ -80,9 +81,16 @@ export default class InspectorManager {
   };
 
   private formatTooltipContent = (element: Element): string => {
-    const dimensionInfo = `<span id="${IDS.dimensions}">${this.getDimensionInfo(element)}</span>`;
-    const fontInfo = `<span id="${IDS.font}">${this.getFontInfo(element)}</span>`;
-    const tag = `<span id="${IDS.tagName}">&lt;<span>${element.tagName.toLowerCase()}</span>/&gt;</span>`;
+    const tag = SettingsState.settings.showTagInfo
+      ? `<span id="${IDS.tagName}">&lt;<span>${element.tagName.toLowerCase()}</span>/&gt;</span>`
+      : "";
+    const dimensionInfo = SettingsState.settings.showDimensions
+      ? `<span id="${IDS.dimensions}">${this.getDimensionInfo(element)}</span>`
+      : "";
+    const fontInfo = SettingsState.settings.showFontInfo
+      ? `<span id="${IDS.font}">${this.getFontInfo(element)}</span>`
+      : "";
+
     return `${tag} ${dimensionInfo} ${fontInfo}`;
   };
 

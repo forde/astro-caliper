@@ -1,8 +1,6 @@
 import { IDS } from "./constants";
 import { createContainer } from "./utils/dom";
 import { TooltipState, TooltipStateInterface } from "./state/TooltipState";
-import { RullerIcon } from "./assets/icons";
-import { text } from "node:stream/consumers";
 
 export default class TooltipManager {
   private readonly OFFSET = 15; // Distance from cursor
@@ -36,6 +34,12 @@ export default class TooltipManager {
     this.unsubscribeFromTooltipState = TooltipState.subscribe((state) => {
       if (!this.tooltip) return;
       this.tooltip.innerHTML = this.formatTooltipContent(state);
+
+      if (this.tooltip.innerHTML.trim() === "") {
+        this.tooltip.style.display = "none";
+      } else {
+        this.tooltip.style.display = "block";
+      }
     });
 
     document.addEventListener("mousemove", this.boundMouseMove);
@@ -106,8 +110,8 @@ export default class TooltipManager {
     // Skip if hovering the tooltip itself or indicators
     if (
       target.id === IDS.tooltip ||
-      target.id === IDS.breakpointIndicator ||
-      target.closest("astro-dev-toolbar") !== null
+      target.closest("astro-dev-toolbar") !== null ||
+      target.closest(`#${IDS.breakpointIndicator}`) !== null
     ) {
       this.tooltip.style.opacity = "0";
       return;

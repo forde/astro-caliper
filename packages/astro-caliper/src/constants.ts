@@ -1,5 +1,3 @@
-export const STORAGE_KEY = "astro-caliper-enabled";
-
 export const IDS = {
   styles: "astro-caliper-styles",
   breakpointIndicator: "astro-caliper-breakpoint-indicator",
@@ -13,8 +11,11 @@ export const IDS = {
   dimensions: "astro-caliper-dimensions",
   font: "astro-caliper-font-info",
   tooltipLabel: "astro-caliper-tooltip-label",
+  settingsToggleButton: "astro-caliper-settings-toggle-button",
 } as const;
 
 export const CLASS_NAMES = {
   highlight: "astro-caliper-highlight",
 } as const;
+
+export const STORAGE_KEY = "astro-caliper-settings" as const;

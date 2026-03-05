@@ -1,5 +1,7 @@
 import { IDS } from "./constants";
 import { createContainer } from "./utils/dom";
+import { CogIcon } from "./assets/icons";
+import { SettingsState } from "./state/SettingsState";
 
 interface BreakpointIndicatorInt extends HTMLElement {
   resizeObserver?: ResizeObserver;
@@ -34,7 +36,20 @@ export default class BreakpointIndicator {
 
   private updateText(indicator: HTMLElement): void {
     const width = window.innerWidth;
-    indicator.textContent = ` (${width}px)`;
+    indicator.innerHTML = ` (${width}px) `;
+    indicator.appendChild(this.settingsToggle());
+  }
+
+  private settingsToggle(): HTMLElement {
+    const button = document.createElement("button");
+    button.id = IDS.settingsToggleButton;
+    button.addEventListener("click", () => {
+      SettingsState.update({
+        settingsWindowVisible: !SettingsState.settings.settingsWindowVisible,
+      });
+    });
+    button.innerHTML = CogIcon;
+    return button;
   }
 
   remove(): void {
