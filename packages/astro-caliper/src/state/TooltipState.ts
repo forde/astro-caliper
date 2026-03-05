@@ -1,20 +1,35 @@
-type TooltipStateListener = (state: { content: string }) => void;
+export type TooltipMode = "default" | "click-prevention" | "ruller";
+
+export interface TooltipStateInterface {
+  content: string;
+  mode: TooltipMode;
+}
+
+export type TooltipStateListener = (state: TooltipStateInterface) => void;
 
 class TooltipStateManager {
   private _content: string = "";
+  private _mode: TooltipMode = "default";
+
   private listeners: Set<TooltipStateListener> = new Set();
 
   get content(): string {
     return this._content;
   }
 
-  update(content: string): void {
-    this._content = content;
+  get mode(): TooltipMode {
+    return this._mode;
+  }
+
+  update({ content, mode }: Partial<TooltipStateInterface>): void {
+    this._content = content ?? this._content;
+    this._mode = mode ?? this._mode;
     this.notify();
   }
 
   reset(): void {
     this._content = "";
+    this._mode = "default";
     this.notify();
   }
 
@@ -25,7 +40,7 @@ class TooltipStateManager {
   }
 
   private notify(): void {
-    const state = { content: this._content };
+    const state = { content: this._content, mode: this._mode };
     this.listeners.forEach((listener) => listener(state));
   }
 }

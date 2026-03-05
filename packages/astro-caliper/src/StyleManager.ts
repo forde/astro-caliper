@@ -40,21 +40,25 @@ export default class StyleManager {
       box-shadow: ${shadow};
       white-space: nowrap;
     }
+    #${IDS.tooltip} *, #${IDS.breakpointIndicator} * {
+      outline: none !important;
+    }
+    #${IDS.tooltipLabel} {
+      font-size: 11px;
+      padding: 4px 0;
+      line-height: 1;
+    }
     #${IDS.tagName} {
       color: #abb2bf;
-      outline: none!important;
       span {
         color: #e5c07b;
-        outline: none!important;
       }
     }
     #${IDS.dimensions} {
       color: #61afef;
-      outline: none!important;
     }
     #${IDS.font} {
       color: #8fb773;
-      outline: none!important;
     }
   `;
 

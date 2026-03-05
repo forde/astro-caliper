@@ -1,7 +1,7 @@
 import { IDS } from "./constants";
 import { createContainer } from "./utils/dom";
 import { RulerState } from "./state/RulerState";
-import { TooltipState } from "./state/TooltopState";
+import { TooltipState } from "./state/TooltipState";
 
 export interface RulerElement extends HTMLElement {
   rulerManager?: RulerManager;
@@ -103,7 +103,7 @@ export default class RulerManager {
       const dy = Math.abs(this.currentMouseY - this.staticY);
 
       RulerState.update(dx, dy, true);
-      TooltipState.update(`X ${dx} Y ${dy}`);
+      TooltipState.update({ content: `X ${dx} Y ${dy}` });
 
       this.updateDynamicEnd();
       this.updateLine();
@@ -128,14 +128,14 @@ export default class RulerManager {
       this.container?.style.setProperty("display", "block");
 
       RulerState.update(0, 0, true);
-      TooltipState.update("X 0 Y 0");
+      TooltipState.update({ content: "X 0 Y 0", mode: "ruller" });
     }
   }
 
   private handleKeyUp(e: KeyboardEvent): void {
     if (e.key === "Alt" && this.isActive) {
       this.isActive = false;
-      TooltipState.update("");
+      TooltipState.update({ content: "", mode: "default" });
       RulerState.reset();
       this.container?.style.setProperty("display", "none");
     }

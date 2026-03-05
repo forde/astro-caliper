@@ -7,6 +7,7 @@ import StyleManager from "./StyleManager";
 import RulerManager from "./RulerManager";
 import InspectorManager from "./InspectorManager";
 import { ToolbarAppEventTarget } from "astro/runtime/client/dev-toolbar/helpers.js";
+import ClickManager from "./ClickManager";
 
 export interface AppConfig {}
 
@@ -17,6 +18,7 @@ const bootstrap = (app: ToolbarAppEventTarget, config: AppConfig) => {
   const ruller = new RulerManager();
   const tooltip = new TooltipManager();
   const inspector = new InspectorManager();
+  const clickManager = new ClickManager();
 
   const enableFeatures = (): void => {
     styleManager.inject();
@@ -25,6 +27,7 @@ const bootstrap = (app: ToolbarAppEventTarget, config: AppConfig) => {
     ruller.create();
     inspector.create();
     appState.enable();
+    clickManager.create();
   };
 
   const disableFeatures = (): void => {
@@ -34,6 +37,7 @@ const bootstrap = (app: ToolbarAppEventTarget, config: AppConfig) => {
     ruller.remove();
     inspector.remove();
     appState.disable();
+    clickManager.remove();
   };
 
   app.onToggled((data) => {

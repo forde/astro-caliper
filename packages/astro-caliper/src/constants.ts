@@ -12,6 +12,7 @@ export const IDS = {
   tagName: "astro-caliper-tag-name",
   dimensions: "astro-caliper-dimensions",
   font: "astro-caliper-font-info",
+  tooltipLabel: "astro-caliper-tooltip-label",
 } as const;
 
 export const CLASS_NAMES = {

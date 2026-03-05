@@ -1,6 +1,8 @@
 import { IDS } from "./constants";
 import { createContainer } from "./utils/dom";
-import { TooltipState } from "./state/TooltopState";
+import { TooltipState, TooltipStateInterface } from "./state/TooltipState";
+import { RullerIcon } from "./assets/icons";
+import { text } from "node:stream/consumers";
 
 export default class TooltipManager {
   private readonly OFFSET = 15; // Distance from cursor
@@ -33,12 +35,27 @@ export default class TooltipManager {
 
     this.unsubscribeFromTooltipState = TooltipState.subscribe((state) => {
       if (!this.tooltip) return;
-      this.tooltip.innerHTML = state.content;
+      this.tooltip.innerHTML = this.formatTooltipContent(state);
     });
 
     document.addEventListener("mousemove", this.boundMouseMove);
     document.addEventListener("mouseleave", this.boundMouseLeave);
   }
+
+  private formatTooltipContent(state: TooltipStateInterface): string {
+    return `
+      ${this.formatTooltipLabel(state)}
+      ${state.content}
+    `;
+  }
+
+  private formatTooltipLabel = (state: TooltipStateInterface): string => {
+    let content = "";
+    if (state.mode === "click-prevention") {
+      content = `Click prevent default: <span style="color: #8fb773;">ON</span>`;
+    }
+    return content ? `<div id="${IDS.tooltipLabel}">${content}</div>` : "";
+  };
 
   private positionTooltip = (e: MouseEvent): void => {
     if (!this.tooltip) return;

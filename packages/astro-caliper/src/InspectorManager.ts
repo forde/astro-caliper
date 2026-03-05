@@ -1,6 +1,6 @@
 import { IDS, CLASS_NAMES } from "./constants";
 import { RulerState } from "./state/RulerState";
-import { TooltipState } from "./state/TooltopState";
+import { TooltipState } from "./state/TooltipState";
 
 export default class InspectorManager {
   // Element references
@@ -28,7 +28,7 @@ export default class InspectorManager {
 
         if (!target) return;
 
-        TooltipState.update(this.formatTooltipContent(target));
+        TooltipState.update({ content: this.formatTooltipContent(target) });
       }
     });
 
@@ -124,7 +124,7 @@ export default class InspectorManager {
       // Add highlight to current element
       target.classList.add(CLASS_NAMES.highlight);
 
-      TooltipState.update(this.formatTooltipContent(target));
+      TooltipState.update({ content: this.formatTooltipContent(target) });
     }
   };
 
