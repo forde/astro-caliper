@@ -21,12 +21,14 @@ export default class RulerManager {
   private line: HTMLElement | null = null;
 
   // Bound handlers (for proper removal)
+  private boundClick: (e: MouseEvent) => void;
   private boundMouseMove: (e: MouseEvent) => void;
   private boundKeyDown: (e: KeyboardEvent) => void;
   private boundKeyUp: (e: KeyboardEvent) => void;
 
   constructor() {
     // Bind handlers to this instance
+    this.boundClick = this.handleClick.bind(this);
     this.boundMouseMove = this.handleMouseMove.bind(this);
     this.boundKeyDown = this.handleKeyDown.bind(this);
     this.boundKeyUp = this.handleKeyUp.bind(this);
@@ -52,6 +54,7 @@ export default class RulerManager {
     this.container.rulerManager = this;
 
     // Attach event listeners
+    document.addEventListener("click", this.boundClick);
     document.addEventListener("mousemove", this.boundMouseMove);
     document.addEventListener("keydown", this.boundKeyDown);
     document.addEventListener("keyup", this.boundKeyUp);
@@ -59,6 +62,7 @@ export default class RulerManager {
 
   remove(): void {
     // Remove event listeners
+    document.removeEventListener("click", this.boundClick);
     document.removeEventListener("mousemove", this.boundMouseMove);
     document.removeEventListener("keydown", this.boundKeyDown);
     document.removeEventListener("keyup", this.boundKeyUp);
@@ -92,6 +96,12 @@ export default class RulerManager {
 
     this.dynamicEnd.style.left = `${this.currentMouseX}px`;
     this.dynamicEnd.style.top = `${this.currentMouseY}px`;
+  }
+
+  private handleClick(e: MouseEvent): void {
+    if (this.isActive) {
+      e.preventDefault();
+    }
   }
 
   private handleMouseMove(e: MouseEvent): void {

@@ -1,4 +1,5 @@
 import { SettingsState, SettingsInterface } from "./state/SettingsState";
+import { OptionAltKeysIcon, PKeyIcon } from "./assets/icons";
 
 interface Setting<K extends keyof SettingsInterface> {
   title?: string;
@@ -58,6 +59,18 @@ export default class SettingsManager {
         }
       }
     }
+
+    .feature-container {
+      font-size: 14px;
+      line-height: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      section {
+        max-width: 78%;
+        color: rgba(191, 193, 201, 1);
+      }
+    }
   `;
   constructor(canvas: ShadowRoot) {
     const style = document.createElement("style");
@@ -69,8 +82,7 @@ export default class SettingsManager {
     this.renderTitle();
     this.renderHr();
     this.renderToggle({
-      title: "Preserve state",
-      description: "Preserve Caliper ON state between page reloads.",
+      title: "Preserve Caliper ON state between page reloads",
       name: "preserveEnabled",
       value: true,
     } as Setting<"preserveEnabled">);
@@ -93,6 +105,7 @@ export default class SettingsManager {
       value: true,
     } as Setting<"showFontInfo">);
     this.renderHr();
+    this.renderFeatures();
 
     this.window.style.display = "none"; // start hidden
     canvas.appendChild(this.window);
@@ -170,6 +183,34 @@ export default class SettingsManager {
 
     this.window.appendChild(label);
   }
+
+  private renderFeatures = (): void => {
+    this.window.appendChild(
+      this.featureEl(
+        "Hold Alt / ⌥ and drag to measure distance between elements.",
+        OptionAltKeysIcon,
+      ),
+    );
+    this.renderBr();
+    this.window.appendChild(
+      this.featureEl(
+        "Hold P to disable click events and prevent accidental navigation <br/>(ideal for mobile mode with Touch Emulation).",
+        PKeyIcon,
+      ),
+    );
+  };
+
+  private featureEl = (description: string, icon: string): Element => {
+    const el = document.createElement("div");
+    el.className = "feature-container";
+    el.innerHTML = `
+      <section>
+        ${description}
+      </section>
+      ${icon}
+    `;
+    return el;
+  };
 
   static init(canvas: ShadowRoot): SettingsManager {
     const manager = new SettingsManager(canvas);
