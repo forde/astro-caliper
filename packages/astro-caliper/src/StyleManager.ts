@@ -92,7 +92,7 @@ export default class StyleManager {
     }
   `;
 
-  private readonly RULLER_STYLES = `
+  private readonly RULER_STYLES = `
     #${IDS.rulerContainer} {
       position: fixed;
       pointer-events: none;
@@ -141,7 +141,7 @@ export default class StyleManager {
       ${this.OUTLINE_STYLES}
       ${this.TOOLTIP_STYLES}
       ${this.BREAKPOINT_INDICATOR_STYLES}
-      ${this.RULLER_STYLES}
+      ${this.RULER_STYLES}
     `;
     document.head.appendChild(style);
   }

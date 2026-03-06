@@ -1,4 +1,4 @@
-export const RullerIcon = `
+export const RulerIcon = `
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect x="13.7363" y="1.41421" width="6.85783" height="17.4264" transform="rotate(45 13.7363 1.41421)" stroke="white" stroke-width="2" stroke-linejoin="round"/>
   <path d="M5.39795 13.3541L8.4402 16.4044" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>

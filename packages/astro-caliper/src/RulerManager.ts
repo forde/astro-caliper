@@ -138,7 +138,7 @@ export default class RulerManager {
       this.container?.style.setProperty("display", "block");
 
       RulerState.update(0, 0, true);
-      TooltipState.update({ content: "X 0 Y 0", mode: "ruller" });
+      TooltipState.update({ content: "X 0 Y 0", mode: "ruler" });
     }
   }
 

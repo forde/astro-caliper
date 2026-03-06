@@ -19,7 +19,7 @@ const bootstrap = (
 ) => {
   const styleManager = new StyleManager();
   const breakpointManager = new BreakpointManager();
-  const ruller = new RulerManager();
+  const ruler = new RulerManager();
   const tooltip = new TooltipManager();
   const inspector = new InspectorManager();
   const clickManager = new ClickManager();
@@ -31,7 +31,7 @@ const bootstrap = (
     styleManager.inject();
     breakpointManager.create();
     tooltip.create();
-    ruller.create();
+    ruler.create();
     inspector.create();
     clickManager.create();
   };
@@ -41,7 +41,7 @@ const bootstrap = (
     styleManager.remove();
     breakpointManager.remove();
     tooltip.remove();
-    ruller.remove();
+    ruler.remove();
     inspector.remove();
     clickManager.remove();
   };

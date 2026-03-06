@@ -1,4 +1,4 @@
-export type TooltipMode = "default" | "click-prevention" | "ruller";
+export type TooltipMode = "default" | "click-prevention" | "ruler";
 
 export interface TooltipStateInterface {
   content: string;
