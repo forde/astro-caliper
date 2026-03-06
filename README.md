@@ -55,8 +55,8 @@ Tool can persist its ON state (trough `localstorage`) between page reloads and n
 Install as a dev dependency
 
 ```bash
-pnpm add -D astro-caliper
-npm install --save-dev astro-caliper
+pnpm add -D ...
+npm install --save-dev ...
 ```
 
 Add Astro config integration:
