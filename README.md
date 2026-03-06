@@ -1,36 +1,54 @@
-![Alt text](./packages/astro-caliper/src/assets/banner.png)
+![Astro Caliper banner](./images/banner.jpg)
 
-## Astro dev toolber integration
+## Layout tool for Astro dev toolbar
 
-Caliper is an Astro toolbar app designed to assist developers in converting designs to code. It provides visual aids and inspection tools directly within the browser.
+**Caliper** is a precision layout tool for the Astro (v 5+) Dev Toolbar. Stop guessing margins and hunting through the "Elements" tab — measure, inspect and check alignment of your components with pixel perfection directly in the browser.
 
-## Features
+### 🚀 Quick Features
 
-When enabled via the Astro Developer Toolbar, this app activates the following features:
+| Feature            | Action / Shortcut  | Description                                                             |
+| :----------------- | :----------------- | :---------------------------------------------------------------------- |
+| **🔍 Inspector**   | Hover Element      | View live dimensions, font families, and computed styles.               |
+| **📏 Ruler**       | `Alt` / `⌥` + Drag | Measure pixel-perfect X & Y distances between any two points.           |
+| **📱 Breakpoints** | Top Overlay        | Real-time indicator for active CSS breakpoints (SM, MD, LG, etc.).      |
+| **⚓ Click Trap**  | Hold `P`           | Disable click events to prevent accidental navigation while inspecting. |
+| **🎨 Outlines**    | Toggle Settings    | Visualizes element boundaries to debug layout shifts and alignment.     |
+| **💾 Persistence** | Auto-save          | Remembers your "ON" state and settings across page refreshes.           |
 
-### 1. Breakpoint Indicator
+### 🔍 Tooltip Inspector
 
-Displays a fixed indicator at the top of the screen showing the current Tailwind CSS breakpoint and window width.
+![GIF featuring tooltip inspector feature](./images/tooltip.gif)
 
-- **Visuals**: A pill-shaped badge at the top center.
-- **Info**: Shows `XS`, `SM`, `MD`, `LG`, or `XL` based on current Tailwind CSS breakpoints, along with the exact pixel width (e.g., `(1024px)`).
-- **Updates**: Updates in real-time as you resize the window.
+Provides detailed information about element when you hover over it.
 
-### 2. Tooltip Inspector
+- Shows element tag name.
+- Shows width and height of hovered element.
+- Shows font family, size, line height, and font weight for elements with text content.
+- Adds a red outline to all elements and stronger outline to element currently being inspected to reveal its boundaries.
 
-Provides detailed information about elements when you hover over them.
+Individual tooltip features can be turned on and off in **dedicated settings panel** activated through ⚙️ button located on the breakpoint indicator.
 
-- **Dimensions**: Shows the width and height of the hovered element.
-- **Font Info**: Displays font family, size, line height, and font weight for elements with text content.
-- **Highlight**: Adds a red outline to the element currently being inspected.
-- **Smart Positioning**: The tooltip automatically positions itself to stay within the viewport.
+### 📏 Ruler
 
-### 3. Debug Styles
+![GIF featuring ruler feature](./images/ruler.gif)
 
-Injects global debug styles to help visualize element boundaries.
+Hold `Alt / Option` key and drag to measure X & Y distance between elements.
 
-- **Outlines**: Adds a subtle red outline to _all_ elements to help see layout structure.
-- **Highlight**: Provides a stronger outline for the currently inspected element.
+### 📱 Breakpoint Indicator
+
+![GIF featuring breakpoint indicator feature](./images/breakpoint-indicator.gif)
+
+Current breakpoint (SM, MD etc.) and screen width is shown at the top of the screen.
+
+### ⚓ Click trap
+
+![GIF featuring click trap feature](./images/click-trap.gif)
+
+Hold `P` to disable click events and prevent accidental navigation (ideal for dev tools mobile mode with Touch Emulation).
+
+### 💾 Persisted ON state
+
+Tool can persist its ON state (trough `localstorage`) between page reloads and navigation (can be turned off in settings).
 
 ## Installation & Integration
 
@@ -56,6 +74,4 @@ export default defineConfig({
 
 1.  Run your Astro dev server (`npm run dev`).
 2.  Open the Astro Developer Toolbar (usually at the bottom of the screen).
-3.  Click on the "Dev Tools" ruler icon to oggle the tools.
-
-> **Note**: The app persists its enabled/disabled state using `localStorage`. This means the tools will remain active between page reloads if they were previously enabled.
+3.  Click on the "Caliper" icon on the Astro dev toolbar in the bottom of the screen.
