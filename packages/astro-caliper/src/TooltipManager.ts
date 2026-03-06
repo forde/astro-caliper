@@ -56,7 +56,7 @@ export default class TooltipManager {
   private formatTooltipLabel = (state: TooltipStateInterface): string => {
     let content = "";
     if (state.mode === "click-prevention") {
-      content = `Click prevent default: <span style="color: #8fb773;">ON</span>`;
+      content = `Click trap: <span style="color: #8fb773;">ON</span>`;
     }
     return content ? `<div id="${IDS.tooltipLabel}">${content}</div>` : "";
   };
