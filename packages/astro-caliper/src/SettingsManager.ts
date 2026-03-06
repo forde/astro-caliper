@@ -88,6 +88,12 @@ export default class SettingsManager {
     } as Setting<"preserveEnabled">);
     this.renderHr();
     this.renderToggle({
+      title: "Highlight elements",
+      name: "highlightElements",
+      value: true,
+    } as Setting<"highlightElements">);
+    this.renderBr();
+    this.renderToggle({
       title: "Show tag info",
       name: "showTagInfo",
       value: true,

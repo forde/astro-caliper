@@ -108,7 +108,7 @@ export default class InspectorManager {
   };
 
   private removeHighlight = (): void => {
-    if (this.inspectedElement) {
+    if (this.inspectedElement && SettingsState.settings.highlightElements) {
       this.inspectedElement.classList.remove(CLASS_NAMES.highlight);
     }
   };
@@ -129,8 +129,9 @@ export default class InspectorManager {
       this.removeHighlight();
       this.inspectedElement = target;
 
-      // Add highlight to current element
-      target.classList.add(CLASS_NAMES.highlight);
+      if (SettingsState.settings.highlightElements) {
+        target.classList.add(CLASS_NAMES.highlight);
+      }
 
       TooltipState.update({ content: this.formatTooltipContent(target) });
     }
@@ -142,14 +143,11 @@ export default class InspectorManager {
   };
 
   remove(): void {
-    // Remove event listeners
     document.removeEventListener("mousemove", this.boundMouseMove);
     document.removeEventListener("mouseleave", this.boundMouseLeave);
 
-    // Clear references
     this.inspectedElement = null;
 
-    // Unsubscribe from tooltip state updates
     this.unsubscribeFromRulerState?.();
   }
 

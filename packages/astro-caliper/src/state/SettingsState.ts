@@ -8,6 +8,7 @@ export interface SettingsInterface {
   showTagInfo: boolean;
   showDimensions: boolean;
   showFontInfo: boolean;
+  highlightElements: boolean;
 }
 
 export type SettingsStateListener = (state: SettingsInterface) => void;
@@ -19,6 +20,7 @@ const defaults: SettingsInterface = {
   showTagInfo: true,
   showDimensions: true,
   showFontInfo: true,
+  highlightElements: true,
 };
 
 class SettingsStateManager {

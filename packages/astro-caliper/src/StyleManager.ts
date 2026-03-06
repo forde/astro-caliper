@@ -1,4 +1,5 @@
 import { IDS, CLASS_NAMES } from "./constants";
+import { SettingsState } from "./state/SettingsState";
 
 const background =
   "linear-gradient(180deg, #13151A 0%, rgba(19, 21, 26, 0.88) 100%)";
@@ -21,7 +22,7 @@ export default class StyleManager {
 
     .${CLASS_NAMES.highlight} {
       outline: 2px solid red !important;
-      outline-offset: -1px;
+      outline-offset: -1px!important;
     }
   `;
 
@@ -132,13 +133,29 @@ export default class StyleManager {
     }
   `;
 
-  inject(): void {
+  private _highlightElements: boolean;
+
+  private unsubscribeFromSettingsState: (() => void) | null = null;
+
+  constructor() {
+    this._highlightElements = SettingsState.settings.highlightElements;
+
+    this.unsubscribeFromSettingsState = SettingsState.subscribe((state) => {
+      if (this._highlightElements !== state.highlightElements) {
+        this._highlightElements = state.highlightElements;
+        document.getElementById(IDS.styles)?.remove();
+        this.injectStyles();
+      }
+    });
+  }
+
+  injectStyles(): void {
     if (document.getElementById(IDS.styles)) return;
 
     const style = document.createElement("style");
     style.id = IDS.styles;
     style.textContent = `
-      ${this.OUTLINE_STYLES}
+      ${this._highlightElements ? this.OUTLINE_STYLES : ""}
       ${this.TOOLTIP_STYLES}
       ${this.BREAKPOINT_INDICATOR_STYLES}
       ${this.RULER_STYLES}
@@ -146,7 +163,9 @@ export default class StyleManager {
     document.head.appendChild(style);
   }
 
-  remove(): void {
+  removeStyles(): void {
     document.getElementById(IDS.styles)?.remove();
+
+    this.unsubscribeFromSettingsState?.();
   }
 }

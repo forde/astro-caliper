@@ -28,7 +28,7 @@ const bootstrap = (
 
   const enableFeatures = (): void => {
     SettingsState.update({ enabled: true, settingsWindowVisible: false });
-    styleManager.inject();
+    styleManager.injectStyles();
     breakpointManager.create();
     tooltip.create();
     ruler.create();
@@ -38,7 +38,7 @@ const bootstrap = (
 
   const disableFeatures = (): void => {
     SettingsState.update({ enabled: false, settingsWindowVisible: false });
-    styleManager.remove();
+    styleManager.removeStyles();
     breakpointManager.remove();
     tooltip.remove();
     ruler.remove();
