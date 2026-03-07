@@ -5,7 +5,8 @@
     "dev": "concurrently 'pnpm --filter astro-caliper dev' 'pnpm --filter demo dev'",
     "dev:pkg": "pnpm --filter astro-caliper dev",
     "build:pkg": "pnpm --filter astro-caliper build",
-    "reset": "rm -rf node_modules demo/node_modules packages/astro-caliper/node_modules packages/astro-caliper/dist"
+    "reset": "rm -rf node_modules demo/node_modules packages/astro-caliper/node_modules packages/astro-caliper/dist",
+    "release": "cd packages/astro-caliper && pnpm publish --no-git-checks --access public"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"

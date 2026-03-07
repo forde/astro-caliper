@@ -26,15 +26,30 @@ export default class StyleManager {
     }
   `;
 
+  private readonly RESET_STYLES = `
+    #${IDS.tooltip}, 
+    #${IDS.breakpointIndicator}, 
+    #${IDS.tooltip} *, 
+    #${IDS.breakpointIndicator} buttn, 
+    #${IDS.breakpointIndicator} svg, 
+    #${IDS.rulerContainer}, 
+    #${IDS.rulerStaticEnd}, 
+    #${IDS.rulerDynamicEnd}, 
+    #${IDS.rulerLine} {
+      all: unset;
+    }
+  `;
+
   private readonly TOOLTIP_STYLES = `
     #${IDS.tooltip}, #${IDS.breakpointIndicator} {
+      color: #fff;
+      font-family: monospace;
       position: fixed;
       z-index: 99999;
       padding: 8px 16px;
       color: white;
-      font-family: monospace;
       font-size: 14px;
-      font-weight: medium;
+      font-weight: 500;
       outline: none !important;
       background: ${background};
       border-radius: 20px;
@@ -42,12 +57,14 @@ export default class StyleManager {
       white-space: nowrap;
     }
     #${IDS.tooltip} *, #${IDS.breakpointIndicator} * {
+      font-family: monospace;
       outline: none !important;
     }
     #${IDS.tooltipLabel} {
       font-size: 11px;
       padding: 4px 0;
       line-height: 1;
+      display: block;
     }
     #${IDS.tagName} {
       color: #abb2bf;
@@ -85,6 +102,7 @@ export default class StyleManager {
       svg {
         width: 15px;
         height: 15px;
+        display: block;
         transition: transform 0.3s ease-in-out;
       }
     }
@@ -155,6 +173,7 @@ export default class StyleManager {
     const style = document.createElement("style");
     style.id = IDS.styles;
     style.textContent = `
+      ${this.RESET_STYLES}
       ${this._highlightElements ? this.OUTLINE_STYLES : ""}
       ${this.TOOLTIP_STYLES}
       ${this.BREAKPOINT_INDICATOR_STYLES}

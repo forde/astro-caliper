@@ -39,7 +39,7 @@ export default class SettingsManager {
       unicode-bidi: isolate;
       overflow: hidden;
       border: 1px solid rgba(27, 30, 36, 1);
-      margin: 1em 0;
+      margin: .9em 0;
     }
 
     label {
