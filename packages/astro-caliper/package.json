@@ -1,6 +1,6 @@
 {
   "name": "astro-caliper",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Astro toolbar app designed to assist developers in converting designs to code. It provides visual aids and inspection tools directly within the browser.",
   "type": "module",
   "main": "./dist/index.js",
@@ -12,7 +12,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "readme.md"
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",

@@ -30,7 +30,7 @@ export default class StyleManager {
     #${IDS.tooltip}, 
     #${IDS.breakpointIndicator}, 
     #${IDS.tooltip} *, 
-    #${IDS.breakpointIndicator} buttn, 
+    #${IDS.breakpointIndicator} button, 
     #${IDS.breakpointIndicator} svg, 
     #${IDS.rulerContainer}, 
     #${IDS.rulerStaticEnd}, 
