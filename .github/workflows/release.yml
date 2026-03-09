@@ -4,64 +4,52 @@ on:
     branches:
       - main
 
-concurrency: ${{ github.workflow }}-${{ github.ref }}
+permissions:
+  contents: write
+  id-token: write
+  pull-requests: write
 
 jobs:
   release:
-    name: Release
     runs-on: ubuntu-latest
-    # REQUIRED: id-token for npm OIDC, contents for git pushing
-    permissions:
-      contents: write
-      id-token: write
-      pull-requests: write
-
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v4
         with:
           version: 9
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22 # Use Node 22+ for the most stable OIDC support
+          node-version: 24
           cache: "pnpm"
           registry-url: "https://registry.npmjs.org"
 
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Process Versioning & README
+      - name: Version and Sync README
         run: |
-          # 1. Bump versions and update changelogs
           pnpm changeset version
-
-          # 2. Sync root README to the package folder
           pnpm run copy-readme
 
-          # 3. Commit and push the changes back to main
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
           if [ -n "$(git status --porcelain)" ]; then
             git add .
-            git commit -m "chore: version bump and readme sync [skip ci]"
+            git commit -m "chore: release [skip ci]"
             git push
           fi
 
-      - name: Build and Publish to npm
+      - name: Build and Publish
         run: |
           pnpm run build
+          # We use npm directly here to ensure we use the v11 CLI features
           npm publish ./packages/astro-caliper --access public --provenance
         env:
-          # Setting this to empty forces npm to use OIDC instead of looking for a secret
-          NPM_TOKEN: ""
-          # This enables the "Verified" provenance badge on npm
-          NPM_CONFIG_PROVENANCE: true
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # This variable tells the npm CLI to use the OIDC token from the runner
+          NODE_AUTH_TOKEN: ${{ steps.setup-node.outputs.auth-token }}
