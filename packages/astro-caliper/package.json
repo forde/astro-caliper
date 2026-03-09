@@ -17,7 +17,8 @@
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "scripts": {
     "build": "tsc && cp -r src/assets dist/",
@@ -40,7 +41,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/forde/astro-caliper"
+    "url": "https://github.com/forde/astro-caliper",
+    "directory": "packages/astro-caliper"
   },
   "author": "Konrad Węgrzyniak <konrad@forde.pl>",
   "license": "MIT",

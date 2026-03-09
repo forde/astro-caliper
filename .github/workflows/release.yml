@@ -4,45 +4,64 @@ on:
     branches:
       - main
 
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
 jobs:
   release:
+    name: Release
     runs-on: ubuntu-latest
+    # REQUIRED: id-token for npm OIDC, contents for git pushing
     permissions:
       contents: write
       id-token: write
+      pull-requests: write
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repo
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - uses: pnpm/action-setup@v3
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
         with:
           version: 9
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22 # Use Node 22+ for the most stable OIDC support
           cache: "pnpm"
+          registry-url: "https://registry.npmjs.org"
 
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Version and Publish
+      - name: Process Versioning & README
         run: |
+          # 1. Bump versions and update changelogs
           pnpm changeset version
 
+          # 2. Sync root README to the package folder
           pnpm run copy-readme
 
+          # 3. Commit and push the changes back to main
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
           if [ -n "$(git status --porcelain)" ]; then
             git add .
-            git commit -m "chore: version bump and readme sync"
+            git commit -m "chore: version bump and readme sync [skip ci]"
             git push
           fi
 
+      - name: Build and Publish to npm
+        run: |
           pnpm run build
-          pnpm changeset publish --provenance
+          pnpm changeset publish
         env:
+          # Setting this to empty forces npm to use OIDC instead of looking for a secret
+          NPM_TOKEN: ""
+          # This enables the "Verified" provenance badge on npm
+          NPM_CONFIG_PROVENANCE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
