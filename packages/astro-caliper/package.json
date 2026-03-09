@@ -1,6 +1,6 @@
 {
   "name": "astro-caliper",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Astro toolbar app designed to assist developers in converting designs to code. It provides visual aids and inspection tools directly within the browser.",
   "type": "module",
   "main": "./dist/index.js",

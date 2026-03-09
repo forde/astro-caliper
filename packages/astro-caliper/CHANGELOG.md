@@ -1,5 +1,11 @@
 # astro-caliper
 
+## 1.0.7
+
+### Patch Changes
+
+- 9c4976c: readme image url fix
+
 ## 1.0.6
 
 ### Patch Changes
