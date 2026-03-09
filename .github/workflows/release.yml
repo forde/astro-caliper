@@ -20,9 +20,10 @@ jobs:
           version: 9
 
       - name: Setup Node
+        id: setup-node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: "pnpm"
           registry-url: "https://registry.npmjs.org"
 
@@ -49,3 +50,5 @@ jobs:
       - name: Publish to npm
         if: steps.version.outputs.should_publish == 'true'
         run: npm publish ./packages/astro-caliper --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ steps.setup-node.outputs.auth-token }}
