@@ -37,20 +37,20 @@ export default class StyleManager {
     #${IDS.rulerDynamicEnd}, 
     #${IDS.rulerLine} {
       all: unset;
+      font-family: monospace;
+      outline: none !important;
     }
   `;
 
   private readonly TOOLTIP_STYLES = `
     #${IDS.tooltip}, #${IDS.breakpointIndicator} {
       color: #fff;
-      font-family: monospace;
       position: fixed;
       z-index: 99999;
       padding: 8px 16px;
       color: white;
       font-size: 14px;
       font-weight: 500;
-      outline: none !important;
       background: ${background};
       border-radius: 20px;
       box-shadow: ${shadow};
@@ -98,7 +98,7 @@ export default class StyleManager {
     ).join("\n")}
 
     #${IDS.settingsToggleButton} {
-      cursor: pointer;
+      cursor: pointer!important;
       svg {
         width: 15px;
         height: 15px;
@@ -117,14 +117,12 @@ export default class StyleManager {
       pointer-events: none;
       z-index: 99997;
       display: none;
-      outline: none !important;
     }
     #${IDS.rulerStaticEnd}, #${IDS.rulerDynamicEnd} {
       position: fixed;
       width: 12px;
       height: 12px;
       transform: translate(-50%, -50%);
-      outline: none !important;
       background: ${background};
       box-shadow: ${shadow};
       border-radius: 50%;
@@ -146,7 +144,6 @@ export default class StyleManager {
       height: 1px;
       border-top: 1px dashed #13151A;
       transform-origin: 0 50%;
-      outline: none !important;
       z-index: 99998;
     }
   `;

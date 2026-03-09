@@ -1,5 +1,5 @@
 import { IDS } from "./constants";
-import { createContainer } from "./utils/dom";
+import { createContainer, isInputFocused } from "./utils/dom";
 import { RulerState } from "./state/RulerState";
 import { TooltipState } from "./state/TooltipState";
 
@@ -121,7 +121,9 @@ export default class RulerManager {
   }
 
   private handleKeyDown(e: KeyboardEvent): void {
-    if (e.key === "Alt" && !this.isActive) {
+    const inputFocused = isInputFocused();
+
+    if (e.key === "Alt" && !this.isActive && !inputFocused) {
       e.preventDefault();
       this.isActive = true;
 
