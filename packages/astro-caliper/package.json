@@ -13,7 +13,8 @@
   },
   "files": [
     "dist",
-    "readme.md"
+    "README.md",
+    "CHANGELOG.md"
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
@@ -22,7 +23,7 @@
   },
   "scripts": {
     "build": "tsc && cp -r src/assets dist/",
-    "dev": "nodemon --watch src --ext ts,svg --exec \"pnpm build && cp ../../README.md .\"",
+    "dev": "nodemon --watch src --ext ts,svg --exec \"pnpm build\"",
     "prepublishOnly": "pnpm build"
   },
   "peerDependencies": {

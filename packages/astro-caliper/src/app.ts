@@ -10,14 +10,33 @@ import ClickManager from "./ClickManager";
 import Settingsmanager from "./SettingsManager";
 import { SettingsState } from "./state/SettingsState";
 
-export interface AppConfig {}
+export interface AppConfig {
+  breakpoints: { name: string; minWidth: number }[];
+  outlineColor: string;
+  activeOutlineColor: string;
+}
+
+const defaultConfig: AppConfig = {
+  breakpoints: [
+    { name: "XS", minWidth: 0 },
+    { name: "SM", minWidth: 640 },
+    { name: "MD", minWidth: 768 },
+    { name: "LG", minWidth: 1024 },
+    { name: "XL", minWidth: 1280 },
+    { name: "2XL", minWidth: 1536 },
+  ],
+  outlineColor: "rgba(255, 0, 0, 0.2)",
+  activeOutlineColor: "red",
+};
 
 const bootstrap = (
   canvas: ShadowRoot,
   app: ToolbarAppEventTarget,
-  config: AppConfig,
+  _config: Partial<AppConfig> = {},
 ) => {
-  const styleManager = new StyleManager();
+  const config = { ...defaultConfig, ..._config };
+
+  const styleManager = new StyleManager(config);
   const breakpointManager = new BreakpointManager();
   const ruler = new RulerManager();
   const tooltip = new TooltipManager();
@@ -64,7 +83,7 @@ const bootstrap = (
 
 export default defineToolbarApp({
   init(canvas, app, server) {
-    server.on("caliper:init-config", (config: AppConfig) => {
+    server.on("caliper:init-config", (config: Partial<AppConfig>) => {
       bootstrap(canvas, app, config);
     });
   },

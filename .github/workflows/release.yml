@@ -1,4 +1,5 @@
 name: Release
+
 on:
   push:
     branches:
@@ -7,15 +8,12 @@ on:
 permissions:
   contents: write
   id-token: write
-  pull-requests: write
 
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - uses: pnpm/action-setup@v4
         with:
@@ -24,32 +22,30 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 22
           cache: "pnpm"
           registry-url: "https://registry.npmjs.org"
 
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Version and Sync README
+      - name: Check if version changed
+        id: version
         run: |
-          pnpm changeset version
-          pnpm run copy-readme
-
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          if [ -n "$(git status --porcelain)" ]; then
-            git add .
-            git commit -m "chore: release [skip ci]"
-            git push
+          PUBLISHED=$(npm view astro-caliper version 2>/dev/null || echo "0.0.0")
+          CURRENT=$(node -p "require('./packages/astro-caliper/package.json').version")
+          echo "published=$PUBLISHED" >> $GITHUB_OUTPUT
+          echo "current=$CURRENT" >> $GITHUB_OUTPUT
+          if [ "$PUBLISHED" != "$CURRENT" ]; then
+            echo "should_publish=true" >> $GITHUB_OUTPUT
+          else
+            echo "should_publish=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Build and Publish
-        run: |
-          pnpm run build
-          # We use npm directly here to ensure we use the v11 CLI features
-          npm publish ./packages/astro-caliper --access public --provenance
-        env:
-          # This variable tells the npm CLI to use the OIDC token from the runner
-          NODE_AUTH_TOKEN: ${{ steps.setup-node.outputs.auth-token }}
+      - name: Build
+        if: steps.version.outputs.should_publish == 'true'
+        run: pnpm run build
+
+      - name: Publish to npm
+        if: steps.version.outputs.should_publish == 'true'
+        run: npm publish ./packages/astro-caliper --access public --provenance

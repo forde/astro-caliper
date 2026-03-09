@@ -5,7 +5,7 @@
     "dev": "concurrently 'pnpm --filter astro-caliper dev' 'pnpm --filter demo dev'",
     "copy-readme": "cp README.md packages/astro-caliper/README.md",
     "build": "pnpm --filter astro-caliper build",
-    "release": "pnpm changeset"
+    "release": "pnpm changeset && pnpm changeset version && pnpm copy-readme && git add -A && git commit -m 'chore: release' && git push origin main"
   },
   "devDependencies": {
     "@changesets/cli": "^2.30.0",

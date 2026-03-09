@@ -3,7 +3,7 @@
 ## Layout tool for Astro dev toolbar
 
 [![npm verions](https://img.shields.io/npm/v/astro-caliper?color=blue&label=npm)](https://www.npmjs.com/package/astro-caliper)
-[![downloads](https://img.shields.io/npm/dm/astro-caliper?color=orange)](https://www.npmjs.com/package/astro-caliper)
+![dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)
 
 **Caliper** is a precision layout tool for the Astro (v 5+) Dev Toolbar. Stop guessing margins and hunting through the "Elements" tab — measure, inspect and check alignment of your components with pixel perfection directly in the browser.
 
@@ -53,25 +53,67 @@ Hold `P` to disable click events and prevent accidental navigation (ideal for de
 
 Tool can persist its ON state (trough `localstorage`) between page reloads and navigation (can be turned off in settings).
 
-## Installation & Integration
-
-Install as a dev dependency
+## Installation
 
 ```bash
 pnpm add -D astro-caliper
+# or
 npm install --save-dev astro-caliper
 ```
 
-Add Astro config integration:
+## Usage
 
-```typescript
-//astro.config.mjs
+Add to your Astro config:
+
+```javascript
+// astro.config.mjs
+import { defineConfig } from "astro/config";
 import caliper from "astro-caliper";
 
 export default defineConfig({
   integrations: [caliper()],
 });
 ```
+
+## Configuration
+
+Caliper accepts an optional configuration object:
+
+```javascript
+// astro.config.mjs
+import { defineConfig } from "astro/config";
+import caliper from "astro-caliper";
+
+export default defineConfig({
+  integrations: [
+    caliper({
+      // Custom breakpoints (defaults to Tailwind CSS breakpoints)
+      breakpoints: [
+        { name: "XS", minWidth: 0 },
+        { name: "SM", minWidth: 640 },
+        { name: "MD", minWidth: 768 },
+        { name: "LG", minWidth: 1024 },
+        { name: "XL", minWidth: 1280 },
+        { name: "2XL", minWidth: 1536 },
+      ],
+      // Outline color for all elements
+      outlineColor: "rgba(255, 0, 0, 0.2)",
+      // Outline color for the active/hovered element
+      activeOutlineColor: "red",
+    }),
+  ],
+});
+```
+
+### Options
+
+| Option               | Type                                   | Default                  | Description                              |
+| -------------------- | -------------------------------------- | ------------------------ | ---------------------------------------- |
+| `breakpoints`        | `{ name: string; minWidth: number }[]` | Tailwind defaults        | Breakpoint definitions for the indicator |
+| `outlineColor`       | `string`                               | `"rgba(255, 0, 0, 0.2)"` | Outline color for all elements           |
+| `activeOutlineColor` | `string`                               | `"red"`                  | Outline color for highlighted elements   |
+
+All options are optional — Caliper works out of the box with sensible defaults.
 
 ## Usage
 

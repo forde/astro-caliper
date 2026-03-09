@@ -3,7 +3,7 @@ import { AppConfig } from "./app";
 import { ToolbarIcon } from "./assets/icons.js";
 
 export default function caliperIntegration(
-  config?: AppConfig,
+  config: Partial<AppConfig> = {},
 ): AstroIntegration {
   return {
     name: "caliper-integration",
