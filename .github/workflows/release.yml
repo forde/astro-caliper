@@ -58,7 +58,7 @@ jobs:
       - name: Build and Publish to npm
         run: |
           pnpm run build
-          pnpm changeset publish
+          npm publish ./packages/astro-caliper --access public --provenance
         env:
           # Setting this to empty forces npm to use OIDC instead of looking for a secret
           NPM_TOKEN: ""
