@@ -2,6 +2,9 @@
 
 ## Layout tool for Astro dev toolbar
 
+[![npm verions](https://img.shields.io/npm/v/astro-caliper?color=blue&label=npm)](https://www.npmjs.com/package/astro-caliper)
+[![downloads](https://img.shields.io/npm/dm/astro-caliper?color=orange)](https://www.npmjs.com/package/astro-caliper)
+
 **Caliper** is a precision layout tool for the Astro (v 5+) Dev Toolbar. Stop guessing margins and hunting through the "Elements" tab — measure, inspect and check alignment of your components with pixel perfection directly in the browser.
 
 ### 🚀 Quick Features
