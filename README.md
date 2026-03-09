@@ -1,4 +1,4 @@
-![Astro Caliper banner](./images/banner.jpg)
+![Astro Caliper banner](https://raw.githubusercontent.com/forde/astro-caliper/main/images/banner.jpg)
 
 ## Layout tool for Astro dev toolbar
 
@@ -20,7 +20,7 @@
 
 ### 🔍 Tooltip Inspector
 
-![GIF featuring tooltip inspector feature](./images/tooltip.gif)
+![GIF featuring tooltip inspector feature](https://raw.githubusercontent.com/forde/astro-caliper/main/images/tooltip.gif)
 
 Provides detailed information about element when you hover over it.
 
@@ -33,19 +33,19 @@ Individual tooltip features can be turned on and off in **dedicated settings pan
 
 ### 📏 Ruler
 
-![GIF featuring ruler feature](./images/ruler.gif)
+![GIF featuring ruler feature](https://raw.githubusercontent.com/forde/astro-caliper/main/images/ruler.gif)
 
 Hold `Alt / Option` key and drag to measure X & Y distance between elements.
 
 ### 📱 Breakpoint Indicator
 
-![GIF featuring breakpoint indicator feature](./images/breakpoint-indicator.gif)
+![GIF featuring breakpoint indicator feature](https://raw.githubusercontent.com/forde/astro-caliper/main/images/breakpoint-indicator.gif)
 
 Current breakpoint (SM, MD etc.) and screen width is shown at the top of the screen.
 
 ### ⚓ Click trap
 
-![GIF featuring click trap feature](./images/click-trap.gif)
+![GIF featuring click trap feature](https://raw.githubusercontent.com/forde/astro-caliper/main/images/click-trap.gif)
 
 Hold `P` to disable click events and prevent accidental navigation (ideal for dev tools mobile mode with Touch Emulation).
 
