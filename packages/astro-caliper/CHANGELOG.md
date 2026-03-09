@@ -1,5 +1,11 @@
 # astro-caliper
 
+## 1.1.0
+
+### Minor Changes
+
+- config object introduced, global style handling updated
+
 ## 1.0.7
 
 ### Patch Changes
