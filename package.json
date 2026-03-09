@@ -3,12 +3,12 @@
   "private": true,
   "scripts": {
     "dev": "concurrently 'pnpm --filter astro-caliper dev' 'pnpm --filter demo dev'",
-    "dev:pkg": "pnpm --filter astro-caliper dev",
-    "build:pkg": "pnpm --filter astro-caliper build",
-    "reset": "rm -rf node_modules demo/node_modules packages/astro-caliper/node_modules packages/astro-caliper/dist",
-    "release": "cd packages/astro-caliper && pnpm publish --no-git-checks --access public"
+    "copy-readme": "cp README.md packages/astro-caliper/README.md",
+    "build": "pnpm --filter astro-caliper build",
+    "release": "pnpm run copy-readme && pnpm run build && changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.30.0",
     "concurrently": "^9.2.1"
   }
 }
